@@ -39885,7 +39885,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -39907,115 +39907,116 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var LoginPage = function (_React$Component) {
-	  _inherits(LoginPage, _React$Component);
+	    _inherits(LoginPage, _React$Component);
 
-	  /**
-	   * Class constructor.
-	   */
-	  function LoginPage(props) {
-	    _classCallCheck(this, LoginPage);
+	    /**
+	     * Class constructor.
+	     */
+	    function LoginPage(props) {
+	        _classCallCheck(this, LoginPage);
 
-	    // set the initial component state
-	    var _this = _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).call(this, props));
+	        // set the initial component state
+	        var _this = _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).call(this, props));
 
-	    _this.state = {
-	      errors: {},
-	      user: {
-	        email: '',
-	        password: ''
-	      }
-	    };
+	        _this.state = {
+	            errors: {},
+	            user: {
+	                email: '',
+	                password: ''
+	            }
+	        };
 
-	    _this.processForm = _this.processForm.bind(_this);
-	    _this.changeUser = _this.changeUser.bind(_this);
-	    return _this;
-	  }
-
-	  /**
-	   * Process the form.
-	   *
-	   * @param {object} event - the JavaScript event object
-	   */
-
-
-	  _createClass(LoginPage, [{
-	    key: 'processForm',
-	    value: function processForm(event) {
-	      var _this2 = this;
-
-	      // prevent default action. in this case, action is the form submission event
-	      event.preventDefault();
-
-	      // create a string for an HTTP body message
-	      var email = encodeURIComponent(this.state.user.email);
-	      var password = encodeURIComponent(this.state.user.password);
-	      var formData = 'email=' + email + '&password=' + password;
-
-	      // create an AJAX request
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('post', '/auth/login');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          // success
-
-	          // change the component-container state
-	          _this2.setState({
-	            errors: {}
-	          });
-
-	          console.log('The form is valid');
-	        } else {
-	          // failure
-
-	          // change the component state
-	          var errors = xhr.response.errors ? xhr.response.errors : {};
-	          errors.summary = xhr.response.message;
-
-	          _this2.setState({
-	            errors: errors
-	          });
-	        }
-	      });
-	      xhr.send(formData);
+	        _this.processForm = _this.processForm.bind(_this);
+	        _this.changeUser = _this.changeUser.bind(_this);
+	        return _this;
 	    }
 
 	    /**
-	     * Change the user object.
+	     * Process the form.
 	     *
 	     * @param {object} event - the JavaScript event object
 	     */
 
-	  }, {
-	    key: 'changeUser',
-	    value: function changeUser(event) {
-	      var field = event.target.name;
-	      var user = this.state.user;
-	      user[field] = event.target.value;
 
-	      this.setState({
-	        user: user
-	      });
-	    }
+	    _createClass(LoginPage, [{
+	        key: 'processForm',
+	        value: function processForm(event) {
+	            var _this2 = this;
 
-	    /**
-	     * Render the component.
-	     */
+	            // prevent default action. in this case, action is the form submission event
+	            event.preventDefault();
 
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(_LoginForm2.default, {
-	        onSubmit: this.processForm,
-	        onChange: this.changeUser,
-	        errors: this.state.errors,
-	        user: this.state.user
-	      });
-	    }
-	  }]);
+	            // create a string for an HTTP body message
+	            var email = this.state.user.email;
+	            var password = this.state.user.password;
+	            var formData = JSON.stringify({
+	                'email': email,
+	                'password': password
+	            });
+	            // create an AJAX request
+	            var xhr = new XMLHttpRequest();
+	            xhr.open('post', 'http://34.200.149.58:3003/authenticate');
+	            xhr.setRequestHeader('Content-type', 'application/json');
+	            xhr.responseType = 'json';
+	            xhr.addEventListener('load', function () {
+	                if (xhr.status === 200) {
+	                    // success
 
-	  return LoginPage;
+	                    // change the component-container state
+	                    _this2.setState({
+	                        errors: {}
+	                    });
+	                    alert(xhr.response.auth_token);
+	                } else {
+	                    // failure
+
+	                    // change the component state
+	                    var errors = xhr.response.errors ? xhr.response.errors : {};
+	                    errors.summary = xhr.response.message;
+
+	                    _this2.setState({
+	                        errors: errors
+	                    });
+	                }
+	            });
+	            xhr.send(formData);
+	        }
+
+	        /**
+	         * Change the user object.
+	         *
+	         * @param {object} event - the JavaScript event object
+	         */
+
+	    }, {
+	        key: 'changeUser',
+	        value: function changeUser(event) {
+	            var field = event.target.name;
+	            var user = this.state.user;
+	            user[field] = event.target.value;
+
+	            this.setState({
+	                user: user
+	            });
+	        }
+
+	        /**
+	         * Render the component.
+	         */
+
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(_LoginForm2.default, {
+	                onSubmit: this.processForm,
+	                onChange: this.changeUser,
+	                errors: this.state.errors,
+	                user: this.state.user
+	            });
+	        }
+	    }]);
+
+	    return LoginPage;
 	}(_react2.default.Component);
 
 	exports.default = LoginPage;
