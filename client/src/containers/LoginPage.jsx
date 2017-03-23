@@ -54,7 +54,7 @@ class LoginPage extends React.Component {
                 alert(xhr.response.auth_token)
             } else {
                 // failure
-
+alert(xhr.response.errors)
                 // change the component state
                 const errors = xhr.response.errors ? xhr.response.errors : {};
                 errors.summary = xhr.response.message;

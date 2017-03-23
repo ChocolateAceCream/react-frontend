@@ -39969,7 +39969,7 @@
 	                    alert(xhr.response.auth_token);
 	                } else {
 	                    // failure
-
+	                    alert(xhr.response.errors);
 	                    // change the component state
 	                    var errors = xhr.response.errors ? xhr.response.errors : {};
 	                    errors.summary = xhr.response.message;
