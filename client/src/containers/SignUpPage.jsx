@@ -70,6 +70,12 @@ class SignUpPage extends React.Component {
         console.log('The form is valid');
       } else {
         // failure
+          console.log(xhr.response.errors.email_inspect[0]);
+
+        if(xhr.response.errors){
+            alert("eee")
+              alert(xhr.response.errors.email_inspect[0]);
+        }
 
         const errors = xhr.response.errors ? xhr.response.errors : {};
         errors.summary = xhr.response.message;
