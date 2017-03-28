@@ -13,6 +13,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const authRoutes = require('./server/routes/auth');
 app.use('/auth', authRoutes);
 
+app.get("/*", function(req, res) {
+res.sendFile(__dirname + '/server/static/index.html')
+})
+
 //start the server
 app.listen(3000, ()=> {
     console.log('Server is running on localhost:3000')
