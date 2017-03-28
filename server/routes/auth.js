@@ -101,8 +101,6 @@ router.post('/login', (req, res) => {
             errors: validationResult.errors
         });
     }
-    const rails = new XMLHttpRequest();
-    rails.open ')
 
     return res.status(200).end();
 });

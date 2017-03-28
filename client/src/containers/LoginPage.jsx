@@ -54,10 +54,16 @@ class LoginPage extends React.Component {
                 alert(xhr.response.auth_token)
             } else {
                 // failure
-                alert(xhr.response.errors)
                 // change the component state
-                const errors = xhr.response.errors ? xhr.response.errors : {};
-                errors.summary = xhr.response.message;
+
+                const errors = {};
+                if (xhr.response.errors[0] === 'email not found') {
+                    errors.email = "Email Not Found";
+                }
+                if (xhr.response.errors[0] === 'invalid password') {
+                    errors.password = "Invalid Password";
+                }
+                errors.summary = "Check Errors"
 
                 this.setState({
                     errors

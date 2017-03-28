@@ -39969,10 +39969,16 @@
 	                    alert(xhr.response.auth_token);
 	                } else {
 	                    // failure
-	                    alert(xhr.response.errors);
 	                    // change the component state
-	                    var errors = xhr.response.errors ? xhr.response.errors : {};
-	                    errors.summary = xhr.response.message;
+
+	                    var errors = {};
+	                    if (xhr.response.errors[0] === 'email not found') {
+	                        errors.email = "Email Not Found";
+	                    }
+	                    if (xhr.response.errors[0] === 'invalid password') {
+	                        errors.password = "Invalid Password";
+	                    }
+	                    errors.summary = "Check Errors";
 
 	                    _this2.setState({
 	                        errors: errors
@@ -42266,15 +42272,22 @@
 
 	                    alert(xhr.response.auth_token);
 	                } else {
-	                    // failure
+	                    console.log(xhr.response);
+	                    var errors = {};
 	                    if (xhr.response.name) {
-	                        alert(xhr.response.name);
-	                    } else {
-	                        alert(xhr.response.email);
+	                        errors.name = xhr.response.name[0];
 	                    }
-	                    var errors = xhr.response.errors ? xhr.response.errors : {};
-	                    errors.summary = xhr.response.message;
+	                    if (xhr.response.email) {
+	                        errors.email = xhr.response.email[0];
+	                    }
+	                    if (xhr.response.password) {
+	                        errors.password = xhr.response.password[0];
+	                    }
+	                    if (xhr.response.password_confirmation) {
+	                        errors.password_confirmation = "Password not match";
+	                    }
 
+	                    errors.summary = "Check errors";
 	                    _this2.setState({
 	                        errors: errors
 	                    });

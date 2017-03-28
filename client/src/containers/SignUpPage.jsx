@@ -76,15 +76,22 @@ class SignUpPage extends React.Component {
 
 				alert(xhr.response.auth_token);
             } else {
-                // failure
+                console.log(xhr.response);
+                const errors = {};
                 if (xhr.response.name) {
-                    alert(xhr.response.name);
-                } else {
-                    alert(xhr.response.email);
+                    errors.name = xhr.response.name[0];
                 }
-                const errors = xhr.response.errors ? xhr.response.errors : {};
-                errors.summary = xhr.response.message;
+                if (xhr.response.email) {
+                    errors.email = xhr.response.email[0];
+                }
+                if (xhr.response.password) {
+                    errors.password = xhr.response.password[0];
+                }
+                if (xhr.response.password_confirmation) {
+                    errors.password_confirmation = "Password not match";
+                }
 
+                errors.summary = "Check errors"
                 this.setState({
                     errors
                 });
