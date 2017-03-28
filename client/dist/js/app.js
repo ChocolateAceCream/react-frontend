@@ -42157,7 +42157,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -42179,122 +42179,127 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var SignUpPage = function (_React$Component) {
-	  _inherits(SignUpPage, _React$Component);
+	    _inherits(SignUpPage, _React$Component);
 
-	  /**
-	   * Class constructor.
-	   */
-	  function SignUpPage(props) {
-	    _classCallCheck(this, SignUpPage);
+	    /**
+	     * Class constructor.
+	     */
+	    function SignUpPage(props) {
+	        _classCallCheck(this, SignUpPage);
 
-	    // set the initial component state
-	    var _this = _possibleConstructorReturn(this, (SignUpPage.__proto__ || Object.getPrototypeOf(SignUpPage)).call(this, props));
+	        // set the initial component state
+	        var _this = _possibleConstructorReturn(this, (SignUpPage.__proto__ || Object.getPrototypeOf(SignUpPage)).call(this, props));
 
-	    _this.state = {
-	      errors: {},
-	      user: {
-	        email: '',
-	        name: '',
-	        password: ''
-	      }
-	    };
+	        _this.state = {
+	            errors: {},
+	            user: {
+	                email: '',
+	                name: '',
+	                password: '',
+	                password_confirmation: ''
+	            }
+	        };
 
-	    _this.processForm = _this.processForm.bind(_this);
-	    _this.changeUser = _this.changeUser.bind(_this);
-	    return _this;
-	  }
-
-	  /**
-	   * Change the user object.
-	   *
-	   * @param {object} event - the JavaScript event object
-	   */
-
-
-	  _createClass(SignUpPage, [{
-	    key: 'changeUser',
-	    value: function changeUser(event) {
-	      var field = event.target.name;
-	      var user = this.state.user;
-	      user[field] = event.target.value;
-
-	      this.setState({
-	        user: user
-	      });
+	        _this.processForm = _this.processForm.bind(_this);
+	        _this.changeUser = _this.changeUser.bind(_this);
+	        return _this;
 	    }
 
 	    /**
-	     * Process the form.
+	     * Change the user object.
 	     *
 	     * @param {object} event - the JavaScript event object
 	     */
 
-	  }, {
-	    key: 'processForm',
-	    value: function processForm(event) {
-	      var _this2 = this;
 
-	      // prevent default action. in this case, action is the form submission event
-	      event.preventDefault();
+	    _createClass(SignUpPage, [{
+	        key: 'changeUser',
+	        value: function changeUser(event) {
+	            var field = event.target.name;
+	            var user = this.state.user;
+	            user[field] = event.target.value;
 
-	      // create a string for an HTTP body message
-	      var name = encodeURIComponent(this.state.user.name);
-	      var email = encodeURIComponent(this.state.user.email);
-	      var password = encodeURIComponent(this.state.user.password);
-	      var formData = 'name=' + name + '&email=' + email + '&password=' + password;
-
-	      // create an AJAX request
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('post', '/auth/signup');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          // success
-
-	          // change the component-container state
-	          _this2.setState({
-	            errors: {}
-	          });
-
-	          console.log('The form is valid');
-	        } else {
-	          // failure
-	          console.log(xhr.response.errors.email_inspect[0]);
-
-	          if (xhr.response.errors) {
-	            alert("eee");
-	            alert(xhr.response.errors.email_inspect[0]);
-	          }
-
-	          var errors = xhr.response.errors ? xhr.response.errors : {};
-	          errors.summary = xhr.response.message;
-
-	          _this2.setState({
-	            errors: errors
-	          });
+	            this.setState({
+	                user: user
+	            });
 	        }
-	      });
-	      xhr.send(formData);
-	    }
 
-	    /**
-	     * Render the component.
-	     */
+	        /**
+	         * Process the form.
+	         *
+	         * @param {object} event - the JavaScript event object
+	         */
 
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(_SignUpForm2.default, {
-	        onSubmit: this.processForm,
-	        onChange: this.changeUser,
-	        errors: this.state.errors,
-	        user: this.state.user
-	      });
-	    }
-	  }]);
+	    }, {
+	        key: 'processForm',
+	        value: function processForm(event) {
+	            var _this2 = this;
 
-	  return SignUpPage;
+	            // prevent default action. in this case, action is the form submission event
+	            event.preventDefault();
+
+	            // create a string for an HTTP body message
+	            var name = encodeURIComponent(this.state.user.name);
+	            var email = encodeURIComponent(this.state.user.email);
+	            var password = encodeURIComponent(this.state.user.password);
+	            var password_confirmation = encodeURIComponent(this.state.user.password_confirmation);
+
+	            var formData = JSON.stringify({
+	                'email': email,
+	                'password': password,
+	                'password_confirmation': password_confirmation,
+	                'name': name
+	            });
+	            // create an AJAX request
+	            var xhr = new XMLHttpRequest();
+	            xhr.open('post', 'http://34.200.149.58:3003/users');
+	            xhr.setRequestHeader('Content-type', 'application/json');
+	            xhr.responseType = 'json';
+	            xhr.addEventListener('load', function () {
+	                if (xhr.status === 200) {
+	                    // success
+
+	                    // change the component-container state
+	                    _this2.setState({
+	                        errors: {}
+	                    });
+
+	                    alert(xhr.response.auth_token);
+	                } else {
+	                    // failure
+	                    if (xhr.response.name) {
+	                        alert(xhr.response.name);
+	                    } else {
+	                        alert(xhr.response.email);
+	                    }
+	                    var errors = xhr.response.errors ? xhr.response.errors : {};
+	                    errors.summary = xhr.response.message;
+
+	                    _this2.setState({
+	                        errors: errors
+	                    });
+	                }
+	            });
+	            xhr.send(formData);
+	        }
+
+	        /**
+	         * Render the component.
+	         */
+
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(_SignUpForm2.default, {
+	                onSubmit: this.processForm,
+	                onChange: this.changeUser,
+	                errors: this.state.errors,
+	                user: this.state.user
+	            });
+	        }
+	    }]);
+
+	    return SignUpPage;
 	}(_react2.default.Component);
 
 	exports.default = SignUpPage;
@@ -42380,6 +42385,18 @@
 	          onChange: onChange,
 	          errorText: errors.password,
 	          value: user.password
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'field-line' },
+	        _react2.default.createElement(_TextField2.default, {
+	          floatingLabelText: 'Password Confirmation',
+	          type: 'password',
+	          name: 'password_confirmation',
+	          onChange: onChange,
+	          errorText: errors.password_confirmation,
+	          value: user.password_confirmation
 	        })
 	      ),
 	      _react2.default.createElement(
