@@ -39976,7 +39976,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -40001,70 +40001,79 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	//import axios from 'axios';
+
 	var DashboardPage = function (_React$Component) {
-	  _inherits(DashboardPage, _React$Component);
+		_inherits(DashboardPage, _React$Component);
 
-	  /**
-	   * Class constructor.
+		/**
+	  * Class constructor.
+	  */
+		function DashboardPage(props) {
+			_classCallCheck(this, DashboardPage);
+
+			var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
+
+			_this.state = {
+				secretData: ''
+			};
+			return _this;
+		}
+
+		/**
+	  * This method will be executed after initial rendering.
+	  */
+
+
+		_createClass(DashboardPage, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var _this2 = this;
+
+				/*
+	         axios.defaults.headers.common['Authorization'] =  `bearer ${Auth.getToken()}`
+	         axios.defaults.headers.common['Access-Control-Request-Headers'] = 'Authorization'
+	   axios.get('http://34.200.149.58:3003/dhts/1')
+	   	.then(function (response) {
+	   		console.log(response);
+	   	});
+	             */
+				var xhr = new XMLHttpRequest();
+				xhr.open('get', 'http://34.200.149.58:3003/dhts/1');
+				xhr.setRequestHeader('Content-type', 'application/json');
+				// set the authorization HTTP header
+				xhr.setRequestHeader("X-CSRF-Token", 'bearer ' + _Auth2.default.getToken());
+				xhr.responseType = 'json';
+				xhr.addEventListener('load', function () {
+					if (xhr.status === 200) {
+						_this2.setState({
+							secretData: xhr.response.message
+						});
+					}
+				});
+				xhr.send();
+				/*
+	   $.ajax({
+	   url: 'http://34.200.149.58:3003/dhts/1',
+	   beforeSend: function (xhr){
+	   xhr.setRequestHeader('Authorization', )
+	   }
+	   })
 	   */
-	  function DashboardPage(props) {
-	    _classCallCheck(this, DashboardPage);
+			}
 
-	    var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
-
-	    _this.state = {
-	      secretData: ''
-	    };
-	    return _this;
-	  }
-
-	  /**
-	   * This method will be executed after initial rendering.
+			/**
+	   * Render the component.
 	   */
 
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(_Dashboard2.default, { secretData: this.state.secretData });
+			}
+		}]);
 
-	  _createClass(DashboardPage, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('get', 'http://34.200.149.58:3003/dhts/1');
-	      xhr.setRequestHeader('Content-type', 'application/json');
-	      // set the authorization HTTP header
-	      xhr.setRequestHeader("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE0OTA4OTY1OTN9.ckQuBvYd6htwTAkzp20imMNdInu2tg_16Oy6AwQwhf4");
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          _this2.setState({
-	            secretData: xhr.response.message
-	          });
-	        }
-	      });
-	      xhr.send();
-
-	      /*
-	      $.ajax({
-	      url: 'http://34.200.149.58:3003/dhts/1',
-	      beforeSend: function (xhr){
-	        xhr.setRequestHeader('Authorization', )
-	      }
-	      })
-	      */
-	    }
-
-	    /**
-	     * Render the component.
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(_Dashboard2.default, { secretData: this.state.secretData });
-	    }
-	  }]);
-
-	  return DashboardPage;
+		return DashboardPage;
 	}(_react2.default.Component);
 
 	exports.default = DashboardPage;
@@ -40094,7 +40103,7 @@
 	    { className: 'container' },
 	    _react2.default.createElement(_Card.CardTitle, {
 	      title: 'Dashboard',
-	      subtitle: 'You should get access to this page only after authentication.'
+	      subtitle: 'For Jerry and Star'
 	    }),
 	    secretData && _react2.default.createElement(
 	      _Card.CardText,
