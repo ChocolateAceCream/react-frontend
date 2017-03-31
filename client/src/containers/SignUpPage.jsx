@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Auth from '../modules/Auth';
 import SignUpForm from '../components/SignUpForm.jsx';
 
 class SignUpPage extends React.Component {
@@ -6,10 +7,11 @@ class SignUpPage extends React.Component {
     /**
      * Class constructor.
      */
-    constructor(props) {
-        super(props);
-
+    constructor(props, context) {
+        super(props, context);
+        //store token
         // set the initial component state
+
         this.state = {
             errors: {},
             user: {
@@ -73,8 +75,15 @@ class SignUpPage extends React.Component {
                 this.setState({
                     errors: {}
                 });
+                // set a message
+				localStorage.setItem('successMessage', xhr.response.message);
 
-				alert(xhr.response.auth_token);
+                //set a message
+                Auth.authenticateUser(xhr.response.auth_token);
+
+				// make a redirect
+				this.context.router.replace('/');
+
             } else {
                 console.log(xhr.response);
                 const errors = {};
@@ -115,5 +124,8 @@ class SignUpPage extends React.Component {
     }
 
 }
+SignUpPage.contextTypes = {
+    router: PropTypes.object.isRequired
+};
 
 export default SignUpPage;

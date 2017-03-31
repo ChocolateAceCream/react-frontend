@@ -39976,7 +39976,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -40004,76 +40004,60 @@
 	//import axios from 'axios';
 
 	var DashboardPage = function (_React$Component) {
-		_inherits(DashboardPage, _React$Component);
+	    _inherits(DashboardPage, _React$Component);
 
-		/**
-	  * Class constructor.
-	  */
-		function DashboardPage(props) {
-			_classCallCheck(this, DashboardPage);
+	    /**
+	     * Class constructor.
+	     */
+	    function DashboardPage(props) {
+	        _classCallCheck(this, DashboardPage);
 
-			var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
 
-			_this.state = {
-				secretData: ''
-			};
-			return _this;
-		}
+	        _this.state = {
+	            secretData: ''
+	        };
+	        return _this;
+	    }
 
-		/**
-	  * This method will be executed after initial rendering.
-	  */
+	    /**
+	     * This method will be executed after initial rendering.
+	     */
 
 
-		_createClass(DashboardPage, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				var _this2 = this;
+	    _createClass(DashboardPage, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
 
-				/*
-	         axios.defaults.headers.common['Authorization'] =  `bearer ${Auth.getToken()}`
-	         axios.defaults.headers.common['Access-Control-Request-Headers'] = 'Authorization'
-	   axios.get('http://34.200.149.58:3003/dhts/1')
-	   	.then(function (response) {
-	   		console.log(response);
-	   	});
-	             */
-				var xhr = new XMLHttpRequest();
-				xhr.open('get', 'http://34.200.149.58:3003/dhts/1');
-				xhr.setRequestHeader('Content-type', 'application/json');
-				// set the authorization HTTP header
-				xhr.setRequestHeader("X-CSRF-Token", 'bearer ' + _Auth2.default.getToken());
-				xhr.responseType = 'json';
-				xhr.addEventListener('load', function () {
-					if (xhr.status === 200) {
-						_this2.setState({
-							secretData: xhr.response.message
-						});
-					}
-				});
-				xhr.send();
-				/*
-	   $.ajax({
-	   url: 'http://34.200.149.58:3003/dhts/1',
-	   beforeSend: function (xhr){
-	   xhr.setRequestHeader('Authorization', )
-	   }
-	   })
-	   */
-			}
+	            var xhr = new XMLHttpRequest();
+	            xhr.open('get', 'http://34.200.149.58:3003/dhts/1');
+	            xhr.setRequestHeader('Content-type', 'application/json');
+	            // set the authorization HTTP header
+	            xhr.setRequestHeader("X-CSRF-Token", 'bearer ' + _Auth2.default.getToken());
+	            xhr.responseType = 'json';
+	            xhr.addEventListener('load', function () {
+	                if (xhr.status === 200) {
+	                    _this2.setState({
+	                        secretData: xhr.response.message
+	                    });
+	                }
+	            });
+	            xhr.send();
+	        }
 
-			/**
-	   * Render the component.
-	   */
+	        /**
+	         * Render the component.
+	         */
 
-		}, {
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(_Dashboard2.default, { secretData: this.state.secretData });
-			}
-		}]);
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(_Dashboard2.default, { secretData: this.state.secretData });
+	        }
+	    }]);
 
-		return DashboardPage;
+	    return DashboardPage;
 	}(_react2.default.Component);
 
 	exports.default = DashboardPage;
@@ -42444,6 +42428,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _Auth = __webpack_require__(389);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
 	var _SignUpForm = __webpack_require__(467);
 
 	var _SignUpForm2 = _interopRequireDefault(_SignUpForm);
@@ -42462,11 +42450,13 @@
 	    /**
 	     * Class constructor.
 	     */
-	    function SignUpPage(props) {
+	    function SignUpPage(props, context) {
 	        _classCallCheck(this, SignUpPage);
 
+	        //store token
 	        // set the initial component state
-	        var _this = _possibleConstructorReturn(this, (SignUpPage.__proto__ || Object.getPrototypeOf(SignUpPage)).call(this, props));
+
+	        var _this = _possibleConstructorReturn(this, (SignUpPage.__proto__ || Object.getPrototypeOf(SignUpPage)).call(this, props, context));
 
 	        _this.state = {
 	            errors: {},
@@ -42541,8 +42531,14 @@
 	                    _this2.setState({
 	                        errors: {}
 	                    });
+	                    // set a message
+	                    localStorage.setItem('successMessage', xhr.response.message);
 
-	                    alert(xhr.response.auth_token);
+	                    //set a message
+	                    _Auth2.default.authenticateUser(xhr.response.auth_token);
+
+	                    // make a redirect
+	                    _this2.context.router.replace('/');
 	                } else {
 	                    console.log(xhr.response);
 	                    var errors = {};
@@ -42586,6 +42582,10 @@
 
 	    return SignUpPage;
 	}(_react2.default.Component);
+
+	SignUpPage.contextTypes = {
+	    router: _react.PropTypes.object.isRequired
+	};
 
 	exports.default = SignUpPage;
 
