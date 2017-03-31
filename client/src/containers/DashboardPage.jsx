@@ -21,7 +21,7 @@ class DashboardPage extends React.Component {
      */
     componentDidMount() {
         const xhr = new XMLHttpRequest();
-        xhr.open('get', 'http://34.200.149.58:3003/dhts/1');
+        xhr.open('get', 'http://34.200.149.58:3003/dhts');
         xhr.setRequestHeader('Content-type', 'application/json');
         // set the authorization HTTP header
         xhr.setRequestHeader("X-CSRF-Token", `bearer ${Auth.getToken()}`);
@@ -29,7 +29,7 @@ class DashboardPage extends React.Component {
         xhr.addEventListener('load', () => {
             if (xhr.status === 200) {
                 this.setState({
-                    secretData: xhr.response.message
+                    secretData: JSON.parse(xhr.resonseText)
                 });
             }
         });

@@ -51,10 +51,10 @@ class SignUpPage extends React.Component {
         event.preventDefault();
 
         // create a string for an HTTP body message
-        const name = encodeURIComponent(this.state.user.name);
-        const email = encodeURIComponent(this.state.user.email);
-        const password = encodeURIComponent(this.state.user.password);
-        const password_confirmation = encodeURIComponent(this.state.user.password_confirmation);
+        const name = this.state.user.name;
+        const email = this.state.user.email;
+        const password = this.state.user.password;
+        const password_confirmation = this.state.user.password_confirmation;
 
         const formData = JSON.stringify({
             'email' : email,

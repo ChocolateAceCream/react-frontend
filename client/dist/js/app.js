@@ -40031,7 +40031,7 @@
 	            var _this2 = this;
 
 	            var xhr = new XMLHttpRequest();
-	            xhr.open('get', 'http://34.200.149.58:3003/dhts/1');
+	            xhr.open('get', 'http://34.200.149.58:3003/dhts');
 	            xhr.setRequestHeader('Content-type', 'application/json');
 	            // set the authorization HTTP header
 	            xhr.setRequestHeader("X-CSRF-Token", 'bearer ' + _Auth2.default.getToken());
@@ -40039,7 +40039,7 @@
 	            xhr.addEventListener('load', function () {
 	                if (xhr.status === 200) {
 	                    _this2.setState({
-	                        secretData: xhr.response.message
+	                        secretData: JSON.parse(xhr.resonseText)
 	                    });
 	                }
 	            });
@@ -42507,10 +42507,10 @@
 	            event.preventDefault();
 
 	            // create a string for an HTTP body message
-	            var name = encodeURIComponent(this.state.user.name);
-	            var email = encodeURIComponent(this.state.user.email);
-	            var password = encodeURIComponent(this.state.user.password);
-	            var password_confirmation = encodeURIComponent(this.state.user.password_confirmation);
+	            var name = this.state.user.name;
+	            var email = this.state.user.email;
+	            var password = this.state.user.password;
+	            var password_confirmation = this.state.user.password_confirmation;
 
 	            var formData = JSON.stringify({
 	                'email': email,
