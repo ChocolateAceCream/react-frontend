@@ -40015,7 +40015,9 @@
 	        var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
 
 	        _this.state = {
-	            secretData: ''
+	            secretData: [],
+	            temperature: [],
+	            humidity: []
 	        };
 	        return _this;
 	    }
@@ -40038,8 +40040,18 @@
 	            xhr.responseType = 'json';
 	            xhr.addEventListener('load', function () {
 	                if (xhr.status === 200) {
+	                    console.log(xhr.response);
+	                    var temp = [];
+	                    var humi = [];
+	                    for (var i = 0; i < xhr.response.length; i++) {
+	                        temp.push([Date.parse(xhr.response[i].created_at), xhr.response[i].temperature]);
+	                        humi.push([Date.parse(xhr.response[i].created_at), xhr.response[i].humidity]);
+	                    }
+	                    console.log(temp, humi);
 	                    _this2.setState({
-	                        secretData: JSON.parse(xhr.resonseText)
+	                        secretData: [xhr.resonse],
+	                        temperature: temp,
+	                        humidity: humi
 	                    });
 	                }
 	            });
@@ -40098,7 +40110,7 @@
 	};
 
 	Dashboard.propTypes = {
-	  secretData: _react.PropTypes.string.isRequired
+	  secretData: _react.PropTypes.array.isRequired
 	};
 
 	exports.default = Dashboard;

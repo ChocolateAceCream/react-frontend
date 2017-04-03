@@ -13,7 +13,7 @@ const Dashboard = ({ secretData }) => (
 );
 
 Dashboard.propTypes = {
-  secretData: PropTypes.string.isRequired
+  secretData: PropTypes.array.isRequired
 };
 
 export default Dashboard;
