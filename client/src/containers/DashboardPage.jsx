@@ -59,7 +59,6 @@ class DashboardPage extends React.Component {
 					},
 					xAxis: {
 						type: 'datetime',
-						},
 						title: {
 							text: 'Date'
 						}
@@ -91,7 +90,7 @@ class DashboardPage extends React.Component {
 
 			Highcharts.chart('chart', options);
 
-	);
+        });
 	xhr.send();
 }
 
