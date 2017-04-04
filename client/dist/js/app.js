@@ -34390,15 +34390,15 @@
 
 	var _HomePage2 = _interopRequireDefault(_HomePage);
 
-	var _DashboardPage = __webpack_require__(449);
+	var _DashboardPage = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./containers/DashboardPage.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _DashboardPage2 = _interopRequireDefault(_DashboardPage);
 
-	var _LoginPage = __webpack_require__(451);
+	var _LoginPage = __webpack_require__(450);
 
 	var _LoginPage2 = _interopRequireDefault(_LoginPage);
 
-	var _SignUpPage = __webpack_require__(466);
+	var _SignUpPage = __webpack_require__(465);
 
 	var _SignUpPage2 = _interopRequireDefault(_SignUpPage);
 
@@ -39970,158 +39970,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 449 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Auth = __webpack_require__(389);
-
-	var _Auth2 = _interopRequireDefault(_Auth);
-
-	var _Dashboard = __webpack_require__(450);
-
-	var _Dashboard2 = _interopRequireDefault(_Dashboard);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	//import axios from 'axios';
-
-	var DashboardPage = function (_React$Component) {
-	    _inherits(DashboardPage, _React$Component);
-
-	    /**
-	     * Class constructor.
-	     */
-	    function DashboardPage(props) {
-	        _classCallCheck(this, DashboardPage);
-
-	        var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
-
-	        _this.state = {
-	            secretData: [],
-	            temperature: [],
-	            humidity: []
-	        };
-	        return _this;
-	    }
-
-	    /**
-	     * This method will be executed after initial rendering.
-	     */
-
-
-	    _createClass(DashboardPage, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var _this2 = this;
-
-	            var xhr = new XMLHttpRequest();
-	            xhr.open('get', 'http://34.200.149.58:3003/dhts');
-	            xhr.setRequestHeader('Content-type', 'application/json');
-	            // set the authorization HTTP header
-	            xhr.setRequestHeader("X-CSRF-Token", 'bearer ' + _Auth2.default.getToken());
-	            xhr.responseType = 'json';
-	            xhr.addEventListener('load', function () {
-	                if (xhr.status === 200) {
-	                    console.log(xhr.response);
-	                    var temp = [];
-	                    var humi = [];
-	                    for (var i = 0; i < xhr.response.length; i++) {
-	                        temp.push([Date.parse(xhr.response[i].created_at), xhr.response[i].temperature]);
-	                        humi.push([Date.parse(xhr.response[i].created_at), xhr.response[i].humidity]);
-	                    }
-	                    console.log(temp, humi);
-	                    _this2.setState({
-	                        secretData: [xhr.resonse],
-	                        temperature: temp,
-	                        humidity: humi
-	                    });
-	                }
-	            });
-	            xhr.send();
-	        }
-
-	        /**
-	         * Render the component.
-	         */
-
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(_Dashboard2.default, { secretData: this.state.secretData });
-	        }
-	    }]);
-
-	    return DashboardPage;
-	}(_react2.default.Component);
-
-	exports.default = DashboardPage;
-
-/***/ },
+/* 449 */,
 /* 450 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Card = __webpack_require__(391);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Dashboard = function Dashboard(_ref) {
-	  var secretData = _ref.secretData;
-	  return _react2.default.createElement(
-	    _Card.Card,
-	    { className: 'container' },
-	    _react2.default.createElement(_Card.CardTitle, {
-	      title: 'Dashboard',
-	      subtitle: 'For Jerry and Star'
-	    }),
-	    secretData && _react2.default.createElement(
-	      _Card.CardText,
-	      { style: { fontSize: '16px', color: 'green' } },
-	      secretData
-	    )
-	  );
-	};
-
-	Dashboard.propTypes = {
-	  secretData: _react.PropTypes.array.isRequired
-	};
-
-	exports.default = Dashboard;
-
-/***/ },
-/* 451 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
@@ -40135,7 +39990,7 @@
 
 	var _Auth2 = _interopRequireDefault(_Auth);
 
-	var _LoginForm = __webpack_require__(452);
+	var _LoginForm = __webpack_require__(451);
 
 	var _LoginForm2 = _interopRequireDefault(_LoginForm);
 
@@ -40289,7 +40144,7 @@
 	exports.default = LoginPage;
 
 /***/ },
-/* 452 */
+/* 451 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40306,11 +40161,11 @@
 
 	var _Card = __webpack_require__(391);
 
-	var _RaisedButton = __webpack_require__(453);
+	var _RaisedButton = __webpack_require__(452);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
-	var _TextField = __webpack_require__(455);
+	var _TextField = __webpack_require__(454);
 
 	var _TextField2 = _interopRequireDefault(_TextField);
 
@@ -40397,7 +40252,7 @@
 	exports.default = LoginForm;
 
 /***/ },
-/* 453 */
+/* 452 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40407,7 +40262,7 @@
 	});
 	exports.default = undefined;
 
-	var _RaisedButton = __webpack_require__(454);
+	var _RaisedButton = __webpack_require__(453);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
@@ -40416,7 +40271,7 @@
 	exports.default = _RaisedButton2.default;
 
 /***/ },
-/* 454 */
+/* 453 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -40896,7 +40751,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 455 */
+/* 454 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40906,7 +40761,7 @@
 	});
 	exports.default = undefined;
 
-	var _TextField = __webpack_require__(456);
+	var _TextField = __webpack_require__(455);
 
 	var _TextField2 = _interopRequireDefault(_TextField);
 
@@ -40915,7 +40770,7 @@
 	exports.default = _TextField2.default;
 
 /***/ },
-/* 456 */
+/* 455 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -40972,19 +40827,19 @@
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _EnhancedTextarea = __webpack_require__(457);
+	var _EnhancedTextarea = __webpack_require__(456);
 
 	var _EnhancedTextarea2 = _interopRequireDefault(_EnhancedTextarea);
 
-	var _TextFieldHint = __webpack_require__(463);
+	var _TextFieldHint = __webpack_require__(462);
 
 	var _TextFieldHint2 = _interopRequireDefault(_TextFieldHint);
 
-	var _TextFieldLabel = __webpack_require__(464);
+	var _TextFieldLabel = __webpack_require__(463);
 
 	var _TextFieldLabel2 = _interopRequireDefault(_TextFieldLabel);
 
-	var _TextFieldUnderline = __webpack_require__(465);
+	var _TextFieldUnderline = __webpack_require__(464);
 
 	var _TextFieldUnderline2 = _interopRequireDefault(_TextFieldUnderline);
 
@@ -41496,7 +41351,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 457 */
+/* 456 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -41541,7 +41396,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactEventListener = __webpack_require__(458);
+	var _reactEventListener = __webpack_require__(457);
 
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 
@@ -41742,7 +41597,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 458 */
+/* 457 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -41793,7 +41648,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactAddonsShallowCompare = __webpack_require__(459);
+	var _reactAddonsShallowCompare = __webpack_require__(458);
 
 	var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
 
@@ -41801,7 +41656,7 @@
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _supports = __webpack_require__(461);
+	var _supports = __webpack_require__(460);
 
 	var supports = _interopRequireWildcard(_supports);
 
@@ -41974,13 +41829,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 459 */
+/* 458 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(460);
+	module.exports = __webpack_require__(459);
 
 /***/ },
-/* 460 */
+/* 459 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -42009,7 +41864,7 @@
 	module.exports = shallowCompare;
 
 /***/ },
-/* 461 */
+/* 460 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42019,7 +41874,7 @@
 	});
 	exports.passiveOption = exports.detachEvent = exports.attachEvent = exports.removeEventListener = exports.addEventListener = exports.canUseDOM = undefined;
 
-	var _defineProperty = __webpack_require__(462);
+	var _defineProperty = __webpack_require__(461);
 
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -42062,7 +41917,7 @@
 	}();
 
 /***/ },
-/* 462 */
+/* 461 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42086,7 +41941,7 @@
 	}
 
 /***/ },
-/* 463 */
+/* 462 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -42168,7 +42023,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 464 */
+/* 463 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -42287,7 +42142,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 465 */
+/* 464 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -42425,7 +42280,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 466 */
+/* 465 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42444,7 +42299,7 @@
 
 	var _Auth2 = _interopRequireDefault(_Auth);
 
-	var _SignUpForm = __webpack_require__(467);
+	var _SignUpForm = __webpack_require__(466);
 
 	var _SignUpForm2 = _interopRequireDefault(_SignUpForm);
 
@@ -42602,7 +42457,7 @@
 	exports.default = SignUpPage;
 
 /***/ },
-/* 467 */
+/* 466 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42619,11 +42474,11 @@
 
 	var _Card = __webpack_require__(391);
 
-	var _RaisedButton = __webpack_require__(453);
+	var _RaisedButton = __webpack_require__(452);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
-	var _TextField = __webpack_require__(455);
+	var _TextField = __webpack_require__(454);
 
 	var _TextField2 = _interopRequireDefault(_TextField);
 
