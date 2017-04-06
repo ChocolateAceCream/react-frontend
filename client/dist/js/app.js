@@ -40055,10 +40055,6 @@
 							humidity: humi
 						});
 						var optionsHumi = {
-							global: {
-								timezoneOffset: 5 * 60
-							},
-
 							chart: {
 								type: 'spline'
 							},
@@ -40113,6 +40109,10 @@
 							},
 							xAxis: {
 								type: 'datetime',
+								dateTimeLabelFormats: { // don't display the dummy year
+									day: '%b %e',
+									week: '%b %e'
+								},
 								title: {
 									text: 'Date'
 								}
