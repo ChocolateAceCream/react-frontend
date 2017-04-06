@@ -40045,7 +40045,7 @@
 						var humi = [];
 						for (var i = 0; i < xhr.response.length; i++) {
 							//temp.push([Date.parse(xhr.response[i].created_at),xhr.response[i].temperature]);
-							humi.push([Date.parse(xhr.response[i].created_at), xhr.response[i].humidity]);
+							humi.push([Date.parse(xhr.response[i].created_at) - 1000 * 3600 * 4, xhr.response[i].humidity]);
 							temp.push([Date.parse(xhr.response[i].created_at) - 1000 * 3600 * 4, xhr.response[i].temperature]);
 						}
 
