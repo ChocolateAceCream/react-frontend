@@ -18,6 +18,6 @@ res.sendFile(__dirname + '/server/static/index.html')
 })
 
 //start the server
-app.listen(3000, ()=> {
-    console.log('Server is running on localhost:3000')
+app.listen(3004, ()=> {
+    console.log('Server is running on localhost:3004')
 })

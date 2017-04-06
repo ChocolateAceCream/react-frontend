@@ -40078,8 +40078,11 @@
 	                            min: 0
 	                        },
 	                        tooltip: {
-	                            headerFormat: '<b>{series.name}</b><br>',
-	                            pointFormat: '{point.x:%e. %b}: {point.y:.2f} %'
+	                            formatter: function formatter() {
+	                                return '<b>Humidity: </b>' + this.y + '%' + '<br>' + _highcharts2.default.dateFormat('%I:%M %p', this.x);
+	                            }
+	                            // headerFormat: '<b>{series.name}</b><br>',
+	                            // pointFormat: '{point.x:%e. %b}: {point.y:.2f} %'
 	                        },
 
 	                        plotOptions: {
@@ -40118,8 +40121,12 @@
 	                            min: 0
 	                        },
 	                        tooltip: {
-	                            headerFormat: '<b>{series.name}</b><br>',
-	                            pointFormat: '{point.x:%e. %b}: {point.y:.2f} °C'
+	                            formatter: function formatter() {
+	                                return '<b>Temperature: </b>' + this.y + '(°C)' + '<br>' + _highcharts2.default.dateFormat('%I:%M %p', this.x);
+	                            }
+
+	                            //         headerFormat: '<b>{series.name}</b><br>',
+	                            //       pointFormat: '{point.x:%e. %b}: {point.y:.2f} °C'
 	                        },
 
 	                        plotOptions: {
@@ -43000,7 +43007,6 @@
 	                    // make a redirect
 	                    _this2.context.router.replace('/');
 	                } else {
-	                    console.log(xhr.response);
 	                    var errors = {};
 	                    if (xhr.response.name) {
 	                        errors.name = xhr.response.name[0];

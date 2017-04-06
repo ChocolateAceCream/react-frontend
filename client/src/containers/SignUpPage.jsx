@@ -85,7 +85,6 @@ class SignUpPage extends React.Component {
 				this.context.router.replace('/');
 
             } else {
-                console.log(xhr.response);
                 const errors = {};
                 if (xhr.response.name) {
                     errors.name = xhr.response.name[0];

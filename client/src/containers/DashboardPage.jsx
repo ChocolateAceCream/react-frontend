@@ -69,8 +69,12 @@ class DashboardPage extends React.Component {
                         min: 0
                     },
                     tooltip: {
-                        headerFormat: '<b>{series.name}</b><br>',
-                        pointFormat: '{point.x:%e. %b}: {point.y:.2f} %'
+                        formatter: function() {
+                            return '<b>Humidity: </b>'+ this.y+'%'+'<br>'+
+                                 Highcharts.dateFormat('%I:%M %p', this.x);
+                        }
+                        // headerFormat: '<b>{series.name}</b><br>',
+                        // pointFormat: '{point.x:%e. %b}: {point.y:.2f} %'
                     },
 
                     plotOptions: {
@@ -109,8 +113,13 @@ class DashboardPage extends React.Component {
                         min: 0
                     },
                     tooltip: {
-                        headerFormat: '<b>{series.name}</b><br>',
-                        pointFormat: '{point.x:%e. %b}: {point.y:.2f} °C'
+                        formatter: function() {
+                            return '<b>Temperature: </b>'+ this.y+'(°C)'+'<br>'+
+                                 Highcharts.dateFormat('%I:%M %p', this.x);
+                        }
+
+               //         headerFormat: '<b>{series.name}</b><br>',
+                 //       pointFormat: '{point.x:%e. %b}: {point.y:.2f} °C'
                     },
 
                     plotOptions: {
