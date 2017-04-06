@@ -39976,7 +39976,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+		value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -40004,169 +40004,172 @@
 	//import axios from 'axios';
 
 	var DashboardPage = function (_React$Component) {
-	    _inherits(DashboardPage, _React$Component);
+		_inherits(DashboardPage, _React$Component);
 
-	    /**
-	     * Class constructor.
-	     */
-	    function DashboardPage(props) {
-	        _classCallCheck(this, DashboardPage);
+		/**
+	  * Class constructor.
+	  */
+		function DashboardPage(props) {
+			_classCallCheck(this, DashboardPage);
 
-	        var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
 
-	        _this.state = {
-	            // secretData: [],
-	            temperature: [],
-	            humidity: []
-	        };
-	        return _this;
-	    }
+			_this.state = {
+				// secretData: [],
+				temperature: [],
+				humidity: []
+			};
+			return _this;
+		}
 
-	    /**
-	     * This method will be executed after initial rendering.
-	     */
+		/**
+	  * This method will be executed after initial rendering.
+	  */
 
 
-	    _createClass(DashboardPage, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var _this2 = this;
+		_createClass(DashboardPage, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var _this2 = this;
 
-	            var xhr = new XMLHttpRequest();
-	            xhr.open('get', 'http://34.200.149.58:3003/dhts');
-	            xhr.setRequestHeader('Content-type', 'application/json');
-	            // set the authorization HTTP header
-	            xhr.setRequestHeader("X-CSRF-Token", 'bearer ' + _Auth2.default.getToken());
-	            xhr.responseType = 'json';
-	            xhr.addEventListener('load', function () {
-	                if (xhr.status < 350) {
-	                    //console.log(xhr.response);
-	                    var temp = [];
-	                    var humi = [];
-	                    for (var i = 0; i < xhr.response.length; i++) {
-	                        //temp.push([Date.parse(xhr.response[i].created_at),xhr.response[i].temperature]);
-	                        humi.push([Date.parse(xhr.response[i].created_at), xhr.response[i].humidity]);
-	                        temp.push([Date.parse(xhr.response[i].created_at), xhr.response[i].temperature]);
-	                    }
+				var xhr = new XMLHttpRequest();
+				xhr.open('get', 'http://34.200.149.58:3003/dhts');
+				xhr.setRequestHeader('Content-type', 'application/json');
+				// set the authorization HTTP header
+				xhr.setRequestHeader("X-CSRF-Token", 'bearer ' + _Auth2.default.getToken());
+				xhr.responseType = 'json';
+				xhr.addEventListener('load', function () {
+					if (xhr.status < 350) {
+						//console.log(xhr.response);
+						var temp = [];
+						var humi = [];
+						for (var i = 0; i < xhr.response.length; i++) {
+							//temp.push([Date.parse(xhr.response[i].created_at),xhr.response[i].temperature]);
+							humi.push([Date.parse(xhr.response[i].created_at), xhr.response[i].humidity]);
+							temp.push([Date.parse(xhr.response[i].created_at) - 1000 * 3600 * 4, xhr.response[i].temperature]);
+						}
 
-	                    _this2.setState({
-	                        //secretData: [xhr.resonse],
-	                        temperature: temp,
-	                        humidity: humi
-	                    });
-	                    var optionsHumi = {
+						_this2.setState({
+							//secretData: [xhr.resonse],
+							temperature: temp,
+							humidity: humi
+						});
+						var optionsHumi = {
+							global: {
+								timezoneOffset: 5 * 60
+							},
 
-	                        chart: {
-	                            type: 'spline'
-	                        },
-	                        title: {
-	                            text: 'Humidity level in the room'
-	                        },
-	                        subtitle: {
-	                            text: 'Irregular time data in Highcharts JS'
-	                        },
-	                        xAxis: {
-	                            type: 'datetime',
-	                            title: {
-	                                text: 'Date'
-	                            }
-	                        },
-	                        yAxis: {
-	                            title: {
-	                                text: 'Humidity level (%)'
-	                            },
-	                            min: 0
-	                        },
-	                        tooltip: {
-	                            formatter: function formatter() {
-	                                return '<b>Humidity: </b>' + this.y + '%' + '<br>' + _highcharts2.default.dateFormat('%I:%M %p', this.x);
-	                            }
-	                            // headerFormat: '<b>{series.name}</b><br>',
-	                            // pointFormat: '{point.x:%e. %b}: {point.y:.2f} %'
-	                        },
+							chart: {
+								type: 'spline'
+							},
+							title: {
+								text: 'Humidity level in the room'
+							},
+							subtitle: {
+								text: 'Irregular time data in Highcharts JS'
+							},
+							xAxis: {
+								type: 'datetime',
+								title: {
+									text: 'Date'
+								}
+							},
+							yAxis: {
+								title: {
+									text: 'Humidity level (%)'
+								},
+								min: 0
+							},
+							tooltip: {
+								formatter: function formatter() {
+									return '<b>Humidity: </b>' + this.y + '%' + '<br>' + _highcharts2.default.dateFormat('%I:%M %p', this.x);
+								}
+								// headerFormat: '<b>{series.name}</b><br>',
+								// pointFormat: '{point.x:%e. %b}: {point.y:.2f} %'
+							},
 
-	                        plotOptions: {
-	                            spline: {
-	                                marker: {
-	                                    enabled: true
-	                                }
-	                            }
-	                        },
-	                        series: [{
-	                            name: "Humidity",
-	                            data: _this2.state.humidity
-	                        }]
-	                    };
-	                    var optionsTemp = {
+							plotOptions: {
+								spline: {
+									marker: {
+										enabled: true
+									}
+								}
+							},
+							series: [{
+								name: "Humidity",
+								data: _this2.state.humidity
+							}]
+						};
+						var optionsTemp = {
 
-	                        chart: {
-	                            type: 'spline'
-	                        },
-	                        title: {
-	                            text: 'Room Temperature'
-	                        },
-	                        subtitle: {
-	                            text: 'Irregular time data in Highcharts JS'
-	                        },
-	                        xAxis: {
-	                            type: 'datetime',
-	                            title: {
-	                                text: 'Date'
-	                            }
-	                        },
-	                        yAxis: {
-	                            title: {
-	                                text: 'Temperature (°C)'
-	                            },
-	                            min: 0
-	                        },
-	                        tooltip: {
-	                            formatter: function formatter() {
-	                                return '<b>Temperature: </b>' + this.y + '(°C)' + '<br>' + _highcharts2.default.dateFormat('%I:%M %p', this.x);
-	                            }
+							chart: {
+								type: 'spline'
+							},
+							title: {
+								text: 'Room Temperature'
+							},
+							subtitle: {
+								text: 'Irregular time data in Highcharts JS'
+							},
+							xAxis: {
+								type: 'datetime',
+								title: {
+									text: 'Date'
+								}
+							},
+							yAxis: {
+								title: {
+									text: 'Temperature (°C)'
+								},
+								min: 0
+							},
+							tooltip: {
+								formatter: function formatter() {
+									return '<b>Temperature: </b>' + this.y + '(°C)' + '<br>' + _highcharts2.default.dateFormat('%I:%M %p', this.x);
+								}
 
-	                            //         headerFormat: '<b>{series.name}</b><br>',
-	                            //       pointFormat: '{point.x:%e. %b}: {point.y:.2f} °C'
-	                        },
+								//         headerFormat: '<b>{series.name}</b><br>',
+								//       pointFormat: '{point.x:%e. %b}: {point.y:.2f} °C'
+							},
 
-	                        plotOptions: {
-	                            spline: {
-	                                marker: {
-	                                    enabled: true
-	                                }
-	                            }
-	                        },
-	                        series: [{
-	                            name: "Temperature",
-	                            data: _this2.state.temperature
-	                        }]
-	                    };
-	                };
+							plotOptions: {
+								spline: {
+									marker: {
+										enabled: true
+									}
+								}
+							},
+							series: [{
+								name: "Temperature",
+								data: _this2.state.temperature
+							}]
+						};
+					};
 
-	                _highcharts2.default.chart('chartHumi', optionsHumi);
-	                _highcharts2.default.chart('chartTemp', optionsTemp);
-	            });
-	            xhr.send();
-	        }
+					_highcharts2.default.chart('chartHumi', optionsHumi);
+					_highcharts2.default.chart('chartTemp', optionsTemp);
+				});
+				xhr.send();
+			}
 
-	        /**
-	         * Render the component.
-	         */
+			/**
+	   * Render the component.
+	   */
 
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            //return (<Dashboard secretData={this.state.secretData} />);
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement('div', { id: 'chartHumi' }),
-	                _react2.default.createElement('div', { id: 'chartTemp' })
-	            );
-	        }
-	    }]);
+		}, {
+			key: 'render',
+			value: function render() {
+				//return (<Dashboard secretData={this.state.secretData} />);
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement('div', { id: 'chartHumi' }),
+					_react2.default.createElement('div', { id: 'chartTemp' })
+				);
+			}
+		}]);
 
-	    return DashboardPage;
+		return DashboardPage;
 	}(_react2.default.Component);
 
 	exports.default = DashboardPage;
