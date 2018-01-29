@@ -40805,7 +40805,7 @@
 	                'div',
 	                { className: 'field-line' },
 	                _react2.default.createElement(_TextField2.default, {
-	                    floatingLabelText: 'Email',
+	                    floatingLabelText: 'admin@mail.com',
 	                    name: 'email',
 	                    errorText: errors.email,
 	                    onChange: onChange,
@@ -40816,7 +40816,7 @@
 	                'div',
 	                { className: 'field-line' },
 	                _react2.default.createElement(_TextField2.default, {
-	                    floatingLabelText: 'Password',
+	                    floatingLabelText: '123qweasd',
 	                    type: 'password',
 	                    name: 'password',
 	                    onChange: onChange,
