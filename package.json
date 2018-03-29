@@ -33,5 +33,22 @@
     "babel-preset-react": "^6.16.0",
     "nodemon": "^1.11.0",
     "webpack": "^1.13.3"
-  }
+  },
+  "bundledDependencies": [
+    "axios",
+    "bcrypt",
+    "body-parser",
+    "express",
+    "highcharts",
+    "jsonwebtoken",
+    "material-ui",
+    "mongoose",
+    "passport",
+    "passport-local",
+    "react",
+    "react-dom",
+    "react-router",
+    "react-tap-event-plugin",
+    "validator"
+  ]
 }
